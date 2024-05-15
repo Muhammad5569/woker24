@@ -7,3 +7,4 @@ data/
 
 # Ignore all files with a specific extension
 *.log
+node_modules/
