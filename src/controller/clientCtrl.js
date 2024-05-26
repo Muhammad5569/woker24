@@ -13,7 +13,13 @@ exports.createUser = async(req,res)=>{
         const newUser = await User.create(req.body)
         res.json(newUser)
     } catch (error) {
-            res.status(500).json({ message: error.message });     
+        if (error.code === 11000) {
+            // Duplicate key error
+            res.status(400).send({ message: 'Bunday Foydalanuvchi Mavjud' });
+          } else {
+            // Other errors
+            res.status(500).send({ message: 'An error occurred while registering the user' });
+          }     
     }
 }
 exports.getUserById = async(req,res)=>{

@@ -7,12 +7,6 @@ mongoose.connect('mongodb://127.0.0.1:27017')
     .then(console.log('connected'))
 
 const workerSchema = mongoose.Schema({
-    id:{
-        type:Number,
-        unique:true,
-        required:true,
-        trim:true
-    },
     name:{
         type:String,
         required:true,
@@ -40,6 +34,28 @@ const workerSchema = mongoose.Schema({
         type:String,
         required:true,
         trim:true
+    },
+    info:{
+        pasportRaqam:{
+            type:String,
+            trim:true
+        },
+        adress:{
+            type:String,
+            trim:true
+        },
+        phone:{
+            type:Number,
+            trim:true
+        },
+        Age:{
+            type:Number,
+            trim:true
+        },
+        img:{
+            type:String,
+            trim:true
+        }
     },
     abilities:{
         gender:{
