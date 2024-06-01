@@ -15,10 +15,12 @@ exports.createUser = async(req,res)=>{
     } catch (error) {
         if (error.code === 11000) {
             // Duplicate key error
-            res.status(400).send({ message: 'Bunday Foydalanuvchi Mavjud' });
+            const field = Object.keys(error.keyValue)[0];
+            const errorMessage = `${field.charAt(0).toUpperCase() + field.slice(1)} already taken`;
+            res.status(400).send({ message: errorMessage });
           } else {
             // Other errors
-            res.status(500).send({ message: 'An error occurred while registering the user' });
+            res.status(500).send({ message: error.code});
           }     
     }
 }
