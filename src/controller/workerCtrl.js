@@ -13,7 +13,15 @@ exports.createUser = async(req,res)=>{
         const newUser = await Worker.create(req.body)
         res.json(newUser)
     } catch (error) {
-            res.status(500).json({ message: error.message });     
+        if (error.code === 11000) {
+            // Duplicate key error
+            const field = Object.keys(error.keyValue)[0];
+            const errorMessage = `${field.charAt(0).toUpperCase() + field.slice(1)} already taken`;
+            res.status(400).send({ message: errorMessage });
+          } else {
+            // Other errors
+            res.status(500).send({ message: error.code});
+          }        
     }
 }
 exports.getUserById = async(req,res)=>{
